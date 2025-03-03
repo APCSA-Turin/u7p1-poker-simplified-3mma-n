@@ -5,28 +5,35 @@ import java.util.ArrayList;
 
 public class Game{
     public static String determineWinner(Player p1, Player p2, String p1Hand, String p2Hand,ArrayList<Card> communityCards){
+        // first checks if one hand has a higher rank than the other
         if (Utility.getHandRanking(p1Hand) > Utility.getHandRanking(p2Hand)) {
-            return "Player 1 Wins!";
+            return "Player 1 wins!";
         } else if (Utility.getHandRanking(p2Hand) > Utility.getHandRanking(p1Hand)) {
-            return "Player 2 Wins!";
+            return "Player 2 wins!";
         }
+
+        // finds the highest card in player one's hand
         int p1Max = 0;
-        for (Card card : p1.getAllCards()) {
+        for (Card card : p1.getHand()) {
             if (Utility.getRankValue(card.getRank()) > p1Max) {
                 p1Max = Utility.getRankValue(card.getRank());
             }
         }
+
+        // finds the highest card in player two's hand
         int p2Max = 0;
-        for (Card card : p2.getAllCards()) {
-            if (Utility.getRankValue(card.getRank()) > p1Max) {
+        for (Card card : p2.getHand()) {
+            if (Utility.getRankValue(card.getRank()) > p2Max) {
                 p2Max = Utility.getRankValue(card.getRank());
             }
         }
+
+        // checks which player has the higher card
         if (p1Max > p2Max) {
-            return "Player 1 Wins!";
+            return "Player 1 wins!";
         }
         if (p2Max > p1Max) {
-            return "Player 2 Wins!";
+            return "Player 2 wins!";
         }
         return "Tie!";
     }
@@ -35,21 +42,6 @@ public class Game{
     }
 
     public static void main(String[] args) {
-        Player player = new Player();
-        player.addCard(new Card("9", "♠"));
-        player.addCard(new Card("9", "♦"));
-        
-        // Community Cards
-        ArrayList<Card> communityCards = new ArrayList<>();
-        communityCards.add(new Card("9", "♣"));
-        communityCards.add(new Card("9", "♥"));
-        communityCards.add(new Card("A", "♦"));
-        
-        player.playHand(communityCards);
-        String handResult = player.playHand(communityCards);
-        System.out.println(handResult);
-    }
-        
-        
 
+    }
 }
